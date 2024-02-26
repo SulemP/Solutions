@@ -1,0 +1,74 @@
+.clientes{
+    position: relative;
+    width: 90%;
+}
+
+.tittle{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cliente{
+    width: 120px;
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--ama);
+    color: white;
+    font-size: 1.2rem;
+}
+
+.closeButton{
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    right: 8%;
+    top: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.closeButton:hover{
+    background-color: var(--sec);
+    color: white;
+}
+
+.cuenta{
+    width: 120px;
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--sec);
+    color: white;
+    font-size: 1.2rem;
+}
+
+.table {
+
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.campos{
+    height: 30px;
+    background-color:  var(--blue);
+    color: var(--king);
+}
+
+.campos th{
+    font-size: 1.2rem;
+    /* padding: 5px; */
+}
+
+.table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    color: var(--gray);
+}
+  
+.add{
+    width: 25px;
+    cursor: pointer;
+}

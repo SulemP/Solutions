@@ -1,0 +1,23 @@
+.agregar{
+    position: relative;
+    padding: 2px;
+    color: white;
+}
+
+.agregar div{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: .3rem;
+}
+
+.crear{
+    margin-top: 2rem!important;
+}
+
+.crear button{
+    width: 30%;
+    height: 40px;
+    background-color: var(--ama);
+    border: none;
+    cursor: pointer;
+}

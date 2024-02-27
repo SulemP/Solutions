@@ -31,7 +31,20 @@ export default function Tabla() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        height: 300,
+        height: 400,
+        border: 'none',
+        bgcolor: '#3e5b89',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    const styleCuenta = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        height: 200,
         border: 'none',
         bgcolor: '#fff',
         boxShadow: 24,
@@ -46,25 +59,25 @@ export default function Tabla() {
             edad: 30, 
             sexo: 'Masculino', 
             correo: 'juan@example.com', 
-            curp: 'PERJ900101HCMLNS01' 
+            curp: 'PEGJ900101HCMLNS01' 
         },
         { 
-            nombre: 'Juan', 
-            apellidoPaterno: 'Pérez', 
+            nombre: 'Gabriel', 
+            apellidoPaterno: 'Martínez', 
             apellidoMaterno: 'Gómez', 
             edad: 30, 
             sexo: 'Masculino', 
             correo: 'juan@example.com', 
-            curp: 'PERJ900101HCMLNS01' 
+            curp: 'MAGG900101HCMLNS01' 
         },
         { 
-            nombre: 'Juan', 
-            apellidoPaterno: 'Pérez', 
-            apellidoMaterno: 'Gómez', 
+            nombre: 'Luis', 
+            apellidoPaterno: 'Flores', 
+            apellidoMaterno: 'García', 
             edad: 30, 
             sexo: 'Masculino', 
             correo: 'juan@example.com', 
-            curp: 'PERJ900101HCMLNS01' 
+            curp: 'FLGL900101HCMLNS01' 
         },
     ];
       
@@ -94,10 +107,12 @@ export default function Tabla() {
 
                     open={openCuenta}
                     onClose={handleCloseCuenta}
-                    sx={style}
+                    sx={styleCuenta}
                     >
                     <div className={Style.modalContent}>
-                        <AgregarCuenta/>
+                        <AgregarCuenta
+                            clientes={clientes}
+                        />
                         <button className={Style.closeButton} onClick={handleCloseCuenta}>X</button>
                     </div>
                 </Modal>

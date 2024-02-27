@@ -4,11 +4,21 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import FormHelperText from '@mui/material/FormHelperText';
 import Style from './../styles/agregarCliente.module.css'
  
-export default function AgregarCliente(){
+export default function AgregarCliente(props){
 
-    const [age, setAge] = React.useState('');
+    const {clientes} = props
+    // console.log('clientes', clientes)
+
+    const [cuenta, setCuenta] = useState('')
+    const [persona, setPersona] = React.useState('');
+
+    const [error, setError] = useState({
+        cuenta: '',
+        persona: '',
+    })
 
     const inputStyle = {
         color: '#062554',
@@ -35,8 +45,37 @@ export default function AgregarCliente(){
     };
 
     const handleChange = (event) => {
-      setAge(event.target.value);
+      setPersona(event.target.value);
     };
+
+    const handleCreate = () => {
+        const errores = {}
+        let hayErrores = false
+
+        if(!cuenta || cuenta.length !== 16 || isNaN(cuenta)) {
+            errores.cuenta = 'La cuenta debe tener exactamente 16 dígitos numéricos';
+            hayErrores = true;
+        }        
+
+        if(!persona){
+            errores.persona = 'Seleccionar un cliente'
+            hayErrores = true
+        }
+
+        if(hayErrores) {
+            setError(errores)
+            return
+        }
+
+        console.log("Datos de la cuenta", {cuenta, persona})
+
+        setCuenta('')
+        setPersona('')
+        setError({
+            cuenta:'',
+            persona:''
+        })
+    }
 
     return(
         
@@ -44,36 +83,53 @@ export default function AgregarCliente(){
             <div>
 
                 <TextField 
-                    id="standard-basic" 
-                    label="N Cuenta" 
+                    id="cuenta" 
+                    label="N° Cuenta" 
                     variant="standard" 
                     width='20px'
                     InputLabelProps={{ sx: { ...labelStyle, ...focusedLabelStyle } }}
                     InputProps={{
                         style: inputStyle,
-                        sx: underlineStyle
+                        sx: underlineStyle,
+                        maxLength: 16,
+                        onKeyDown: (e) => {
+                            if ((isNaN(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') || e.target.value.length >= 16) {
+                                e.preventDefault();
+                            }
+                        },
                     }}
+                    value={cuenta}
+                    onChange={(e) => setCuenta(e.target.value)}
+                    error={error.cuenta}
+                    helperText={error.cuenta}
                 />
 
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <FormControl variant="standard">
+                    <InputLabel id="demo-simple-select-standard-label" sx={{ color: 'white' }}>Cliente</InputLabel>
                     <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
-                    onChange={handleChange}
+                        labelId="demo-simple-select-standard-label"
+                        id="persona"
+                        value={persona}
+                        label="persona"
+                        sx={{ width: '160px', height: '40px'}}
+                        inputProps={{ sx: { color: 'white' } }}
+                        onChange={handleChange}
+                        helperText={error.persona}
+                        error={error.persona ? true : false}
                     >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                        {clientes.map((cliente, index) => (
+                            <MenuItem key={index} value={cliente.curp}>
+                                {cliente.nombre} {cliente.apellidoPaterno} {cliente.apellidoMaterno}
+                            </MenuItem>
+                        ))}
                     </Select>
+                    {error.persona && <FormHelperText>{error.persona}</FormHelperText>}
                 </FormControl>
 
             </div>
 
             <div className={Style.crear}>
-                <button>Crear</button>
+                <button onClick={handleCreate}>Crear</button>
             </div>
 
         </div>

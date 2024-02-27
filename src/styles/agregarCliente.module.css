@@ -20,4 +20,9 @@
     background-color: var(--ama);
     border: none;
     cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.crear button:active {
+    transform: translateY(5px); 
 }
